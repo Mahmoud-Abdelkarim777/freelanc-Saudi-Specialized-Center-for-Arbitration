@@ -224,7 +224,7 @@ function App() {
               <span className="absolute top-1/2 right-[-30px] w-3 h-3 bg-main rounded-lg transform -translate-y-1/2 transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:right-0 group-hover:rounded-none group-hover:z-[-1]"></span>
             </h2>
             <form
-              action="https://formsubmit.co/45cbf6b2befff1178e921ee8d6c3cde4"
+              action="https://formsubmit.co/info@sscia.co"
               method="POST"
               className="flex flex-col items-center justify-center gap-4 w-full md:w-[500px]"
             >
