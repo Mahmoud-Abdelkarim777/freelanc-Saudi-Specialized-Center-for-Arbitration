@@ -2,21 +2,54 @@ import logo from "./assets/logo.jpg";
 import "./App.css";
 import { useState } from "react";
 
+// language
+import { useTranslation } from "react-i18next";
+import "./I18n"; // استيراد الترجمة
+
 function App() {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language === "ar";
+
+  // دالة لتغيير اللغة
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "ar" : "en";
+    i18n.changeLanguage(newLang);
+
+    // تغيير اتجاه الصفحة بناءً على اللغة
+    document.documentElement.dir = newLang === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = newLang;
+    localStorage.setItem("lang", newLang);
+  };
 
   return (
     <>
       {/* <!-- start header sextion  --> */}
       <header className="bg-main shadow-md font-sans tracking-wide relative z-50 w-full">
-        <div className="container px-3 mx-auto flex flex-wrap items-center justify-between gap-2  py-3  min-h-[70px]">
-          <a
-            href="https://www.SSCIA.co"
-            target="_blank"
-            className="font-bold text-lg cursor-pointer"
-          >
-            المركز المتخصص السعودي للتحكيم
-          </a>
+        <div className="container px-3 mx-auto flex flex-wrap items-start md:items-center justify-between gap-2  py-3  min-h-[70px]">
+          <div className="flex flex-col md:flex-row items-start md:items-center md:gap-3">
+            <a
+              href="https://www.SSCIA.co"
+              target="_blank"
+              className={`font-bold ${
+                isArabic ? "text-[1rem]" : "text-sm"
+              } cursor-pointer`}
+            >
+              {t("title1")}
+            </a>
+            {/* here  */}
+            <div className={`${isArabic ? "self-start" : "self-end"}`}>
+              <i className="fa-solid fa-globe text-white"></i>
+              <button
+                onClick={toggleLanguage}
+                className="font-bold text-white mx-2 "
+              >
+                {i18n.language === "en" ? "العربية" : "English"}
+              </button>
+              {/* <h1>{t("hell")}</h1>
+            <p>{t("welcome")}</p> */}
+            </div>
+          </div>
           <div
             id="collapseMenu"
             className={`${
@@ -45,16 +78,14 @@ function App() {
             </button>
             <ul className="lg:flex lg:gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-main max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
               <li className=" mb-6 hidden max-lg:block">
-                <p className="font-bold text-lg">
-                  المركز المتخصص السعودي للتحكيم
-                </p>
+                <p className="font-bold text-[1rem]">{t("title")}</p>
               </li>
               <li className="swinging-animation-a-1 max-lg:border-b max-lg:py-3 px-3">
                 <a
                   href="#services"
                   className="  text-black block hover:text-white font-bold text-[15px]"
                 >
-                  خدماتنا
+                  {t("services")}
                 </a>
               </li>
               <li className="swinging-animation-a-2 max-lg:border-b max-lg:py-3 px-3">
@@ -62,7 +93,7 @@ function App() {
                   href="#why"
                   className=" text-black block hover:text-white font-bold text-[15px]"
                 >
-                  لماذا نحن
+                  {t("WhyAreWe")}
                 </a>
               </li>
               <li className="swinging-animation-a-2 max-lg:border-b max-lg:py-3 px-3">
@@ -70,7 +101,7 @@ function App() {
                   href="#contact"
                   className=" text-black block hover:text-white font-bold text-[15px]"
                 >
-                  تواصل معنا
+                  {t("contact")}
                 </a>
               </li>
 
@@ -79,7 +110,7 @@ function App() {
                   href="#vision"
                   className=" text-black block hover:text-white font-bold text-[15px]"
                 >
-                  رؤيتنا
+                  {t("vision")}
                 </a>
               </li>
             </ul>
@@ -113,112 +144,186 @@ function App() {
           id="hero"
           className=" w-full bg-white flex flex-col md:flex-row-reverse items-center justify-between"
         >
-          <div className="">
+          <div
+            className={`${
+              isArabic
+                ? "w-[242px] md:w-[75rem] md:ms-8 md:h-[242px] lg:h-[242px] lg:w-[57rem]"
+                : "w-[242px] md:w-[110rem] md:ms-8 md:h-[242px] lg:h-[242px] lg:w-[70rem]"
+            }`}
+          >
             <img
               src={logo}
-              className="h-[15rem]"
+              className="w-full h-full"
               alt="المركز المتخصص السعودي للتحكيم"
             ></img>
           </div>
           <div>
-            <h1 className="text-xl md:text-4xl font-bold text-center md:text-right mb-4">
-              المركز المتخصص السعودي للتحكيم
+            <h1
+              className={`text-xl md:text-4xl font-bold mb-4 text-center  ${
+                isArabic ? "md:text-right" : "md:text-left"
+              }`}
+            >
+              {t("title")}
             </h1>
-            <p className="text-lg md:text-2xl font-medium text-gray-600 text-center md:text-right">
-              نقدم خدمات التحكيم المتخصصة بكفاءة عالية وفقاً للمعايير الدولية و
-              قواعد المركز الخاصة
+            <p
+              className={` md:text-[1.35rem] font-medium text-gray-600 text-center ${
+                isArabic
+                  ? "md:text-justify text-[1rem]"
+                  : "md:text-justify text-[15px]"
+              }`}
+            >
+              {t("welcome")}
             </p>
           </div>
         </section>
         {/* <!-- end hero section  --> */}
         {/* <!-- start services section  --> */}
         <section id="services" className="">
-          <h2 className="relative text-4xl font-bold text-center rounded-lg my-10 px-6 py-2 border-2  border-main transition duration-500  w-fit mx-auto group z-10">
-            خدماتنا
+          <h2 className="relative text-xl md:text-4xl font-bold text-center rounded-lg my-10 px-6 py-2 border-2  border-main transition duration-500  w-fit mx-auto group z-10">
+            {t("services")}
             {/* الدوائر الجانبية */}
             <span className="absolute top-1/2 left-[-30px] w-3 h-3 bg-main rounded-lg transform -translate-y-1/2 transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:left-0 group-hover:rounded-none group-hover:z-[-1]"></span>
             <span className="absolute top-1/2 right-[-30px] w-3 h-3 bg-main rounded-lg transform -translate-y-1/2 transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:right-0 group-hover:rounded-none group-hover:z-[-1]"></span>
           </h2>
           <div className="grid  grid-cols-1 md:grid-cols-3  gap-4">
-            <article className="relative shadow-md hover:shadow-2xl bg-secondary rounded-lg p-4 text-lg font-medium overflow-hidden group">
-              <div className="absolute inset-0 bg-cyan-500 transition-transform duration-700 translate-y-full group-hover:translate-y-0"></div>
-              <p className="relative z-10">
-                إدارة دعاوى التحكيم المحلية والدولية بالإضافة إلى الوسائل
-                البديلة لحسم المنازعات.
-              </p>
+            <article className="relative shadow-md hover:shadow-2xl bg-secondary rounded-lg p-4 text-[1rem] font-medium overflow-hidden group">
+              <div className="absolute inset-0 bg-main transition-transform duration-700 translate-y-full group-hover:translate-y-0"></div>
+              <p className="relative z-10">{t("article1")}</p>
             </article>
-            <article className="relative shadow-md hover:shadow-2xl bg-secondary rounded-lg p-4 text-lg font-medium overflow-hidden group">
-              <div className="absolute inset-0 bg-cyan-500 transition-transform duration-700 translate-y-full group-hover:translate-y-0"></div>
-              <p className="relative z-10">
-                تقديم خدمات التحكيم المؤسسي وفقا لقواعده.
-              </p>
+            <article className="relative shadow-md hover:shadow-2xl bg-secondary rounded-lg p-4 text-[1rem] font-medium overflow-hidden group">
+              <div className="absolute inset-0 bg-main transition-transform duration-700 translate-y-full group-hover:translate-y-0"></div>
+              <p className="relative z-10">{t("article2")}</p>
             </article>
-            <article className="relative shadow-md hover:shadow-2xl bg-secondary rounded-lg p-4 text-lg font-medium overflow-hidden group">
-              <div className="absolute inset-0 bg-cyan-500 transition-transform duration-700 translate-y-full group-hover:translate-y-0"></div>
-              <p className="relative z-10">
-                إرشاد المستخدمين حول تطبيق هذه القواعد وحول صياغ واستخدام وتعديل
-                الشروط النموذجية التي يقترحها المركز.
-              </p>
+            <article className="relative shadow-md hover:shadow-2xl bg-secondary rounded-lg p-4 text-[1rem] font-medium overflow-hidden group">
+              <div className="absolute inset-0 bg-main transition-transform duration-700 translate-y-full group-hover:translate-y-0"></div>
+              <p className="relative z-10">{t("article3")}</p>
             </article>
-            <article className="relative shadow-md hover:shadow-2xl bg-secondary rounded-lg p-4 text-lg font-medium overflow-hidden group">
-              <div className="absolute inset-0 bg-cyan-500 transition-transform duration-700 translate-y-full group-hover:translate-y-0"></div>
-              <p className="relative z-10">
-                نشر الإرشادات والأبحاث والإحصائيات التي تخدم المجتمعين القانوني
-                والتجاري.
-              </p>
+            <article className="relative shadow-md hover:shadow-2xl bg-secondary rounded-lg p-4 text-[1rem] font-medium overflow-hidden group">
+              <div className="absolute inset-0 bg-main transition-transform duration-700 translate-y-full group-hover:translate-y-0"></div>
+              <p className="relative z-10">{t("article4")}</p>
             </article>
-            <article className="relative shadow-md hover:shadow-2xl bg-secondary rounded-lg p-4 text-lg font-medium overflow-hidden group">
-              <div className="absolute inset-0 bg-cyan-500 transition-transform duration-700 translate-y-full group-hover:translate-y-0"></div>
-              <p className="relative z-10">
-                تنظيم برامج تدريبية وورش عمل بالتعاون مع الغير من المؤسسات
-                والمنظمات والهيئات لإعداد المحكمين الدوليين المتخصصين.{" "}
-              </p>
+            <article className="relative shadow-md hover:shadow-2xl bg-secondary rounded-lg p-4 text-[1rem] font-medium overflow-hidden group">
+              <div className="absolute inset-0 bg-main transition-transform duration-700 translate-y-full group-hover:translate-y-0"></div>
+              <p className="relative z-10">{t("article5")}</p>
             </article>
           </div>
         </section>
         {/* <!-- end services section  --> */}
         {/* <!-- start why section  --> */}
         <section id="why" className="">
-          <h2 className="relative text-4xl font-bold text-center rounded-lg my-10 px-6 py-2 border-2  border-main transition duration-500  w-fit mx-auto group z-10">
-            لماذا نحن
+          <h2 className="relative text-xl md:text-4xl font-bold text-center rounded-lg my-10 px-6 py-2 border-2  border-main transition duration-500  w-fit mx-auto group z-10">
+            {t("WhyAreWe")}
             {/* الدوائر الجانبية */}
             <span className="absolute top-1/2 left-[-30px] w-3 h-3 bg-main rounded-lg transform -translate-y-1/2 transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:left-0 group-hover:rounded-none group-hover:z-[-1]"></span>
             <span className="absolute top-1/2 right-[-30px] w-3 h-3 bg-main rounded-lg transform -translate-y-1/2 transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:right-0 group-hover:rounded-none group-hover:z-[-1]"></span>
           </h2>
           <div className="grid  grid-cols-1 md:grid-cols-4  gap-4">
-            <article className="shadow-md bg-secondary rounded-lg p-4 text-lg font-medium transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-[0px_0px_6px_1px] hover:shadow-main">
-              <p>
-                يتميز المركز بكونه الأقل تكلفةً على مستوى العالم في مجال خدمات
-                التحكيم.
-              </p>
+            <article className="shadow-md bg-secondary rounded-lg p-4 text-[1rem] font-medium transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-[0px_0px_6px_1px] hover:shadow-main">
+              <p>{t("article6")}</p>
             </article>
-            <article className="shadow-md bg-secondary rounded-lg p-4 text-lg font-medium transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-[0px_0px_6px_1px] hover:shadow-main">
-              <p>
-                يسعى المركز إلى إنهاء النزاعات في غضون مُتوسط زمني لا يتجاوز 45
-                يومًا من تاريخ تقديم طلب إدارة التحكيم.
-              </p>
+            <article className="shadow-md bg-secondary rounded-lg p-4 text-[1rem] font-medium transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-[0px_0px_6px_1px] hover:shadow-main">
+              <p>{t("article7")}</p>
             </article>
-            <article className="shadow-md bg-secondary rounded-lg p-4 text-lg font-medium transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-[0px_0px_6px_1px] hover:shadow-main">
-              <p>
-                يحرص المركز على اختيار محكمين مُتخصصين ذوي خبرة عالية في
-                المجالات ذات الصلة بموضوع النزاع، لضمان الفعالية والاحترافية.
-              </p>
+            <article className="shadow-md bg-secondary rounded-lg p-4 text-[1rem] font-medium transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-[0px_0px_6px_1px] hover:shadow-main">
+              <p>{t("article8")}</p>
             </article>
-            <article className="shadow-md bg-secondary rounded-lg p-4 text-lg font-medium transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-[0px_0px_6px_1px] hover:shadow-main">
-              <p>
-                يتمتع المركز بأعلى معايير السِّرية المهنية في مجال فض المنازعات
-                تحكيميًا على المستوى الدولي، بما يضمن حماية كافة التفاصيل
-                المرتبطة بالقضايا
-              </p>
+            <article className="shadow-md bg-secondary rounded-lg p-4 text-[1rem] font-medium transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-[0px_0px_6px_1px] hover:shadow-main">
+              <p>{t("article9")}</p>
             </article>
+          </div>
+          <div className="mt-8 flex flex-col">
+            <h3 className="text-xl md:text-2xl font-bold text-center text-gray-600 underline">
+              {t("tableTitle")}
+            </h3>
+            <table className="table-auto border-collapse  border border-slate-500 mt-8">
+              <thead>
+                <tr>
+                  <th className="border border-slate-600 p-1">{t("No")}</th>
+                  <th className="border border-slate-600 p-1">{t("Country")}</th>
+                  <th className="border border-slate-600 p-1">{t("CenterName")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">1</td>
+                  <td className="border border-slate-600 p-1">{t("country1")}</td>
+                  <td className="border border-slate-600 p-1">{t("table1")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">2</td>
+                  <td className="border border-slate-600 p-1">{t("country2")}</td>
+                  <td className="border border-slate-600 p-1">{t("table2")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">3</td>
+                  <td className="border border-slate-600 p-1">{t("country3")}</td>
+                  <td className="border border-slate-600 p-1">{t("table3")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">4</td>
+                  <td className="border border-slate-600 p-1">{t("country4")}</td>
+                  <td className="border border-slate-600 p-1">{t("table4")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">5</td>
+                  <td className="border border-slate-600 p-1">{t("country5")}</td>
+                  <td className="border border-slate-600 p-1">{t("table5")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">6</td>
+                  <td className="border border-slate-600 p-1">{t("country6")}</td>
+                  <td className="border border-slate-600 p-1">{t("table6")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">7</td>
+                  <td className="border border-slate-600 p-1">{t("country7")}</td>
+                  <td className="border border-slate-600 p-1">{t("table7")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">8</td>
+                  <td className="border border-slate-600 p-1">{t("country8")}</td>
+                  <td className="border border-slate-600 p-1">{t("table8")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">9</td>
+                  <td className="border border-slate-600 p-1">{t("country9")}</td>
+                  <td className="border border-slate-600 p-1">{t("table9")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">10</td>
+                  <td className="border border-slate-600 p-1">{t("country10")}</td>
+                  <td className="border border-slate-600 p-1">{t("table10")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">11</td>
+                  <td className="border border-slate-600 p-1">{t("country11")}</td>
+                  <td className="border border-slate-600 p-1">{t("table11")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">12</td>
+                  <td className="border border-slate-600 p-1">{t("country12")}</td>
+                  <td className="border border-slate-600 p-1">{t("table12")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">13</td>
+                  <td className="border border-slate-600 p-1">{t("country13")}</td>
+                  <td className="border border-slate-600 p-1">{t("table13")}</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 p-1 text-center">14</td>
+                  <td className="border border-slate-600 p-1">{t("country14")}</td>
+                  <td className="border border-slate-600 p-1">{t("table14")}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
         {/* <!-- end why section  --> */}
         {/* <!-- start contact section  --> */}
         <section id="contact" className="mt-10">
           <div className="bg-white rounded-lg shadow-lg flex flex-col items-center ">
-            <h2 className="relative text-4xl font-bold text-center rounded-lg my-10 px-6 py-2 border-2  border-main transition duration-500  w-fit mx-auto group z-10">
-              تواصل معنا
+            <h2 className="relative text-xl md:text-4xl font-bold text-center rounded-lg my-10 px-6 py-2 border-2  border-main transition duration-500  w-fit mx-auto group z-10">
+              {t("contact")}
               {/* الدوائر الجانبية */}
               <span className="absolute top-1/2 left-[-30px] w-3 h-3 bg-main rounded-lg transform -translate-y-1/2 transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:left-0 group-hover:rounded-none group-hover:z-[-1]"></span>
               <span className="absolute top-1/2 right-[-30px] w-3 h-3 bg-main rounded-lg transform -translate-y-1/2 transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:right-0 group-hover:rounded-none group-hover:z-[-1]"></span>
@@ -229,13 +334,13 @@ function App() {
               className="flex flex-col items-center justify-center gap-4 w-full md:w-[500px]"
             >
               <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_subject" value="New Message!"/>
+              <input type="hidden" name="_subject" value="New Message!" />
               <div className="w-full">
                 <input
                   type="text"
                   name="name"
-                  className="flex w-full rounded-lg border bg-secondary px-3 py-3 text-lg focus-visible:outline-1 outline-cyan-500"
-                  placeholder="الاسم بالكامل"
+                  className="flex w-full rounded-lg border bg-secondary px-3 py-3 text-[1rem] focus-visible:outline-1 outline-cyan-500"
+                  placeholder={t("formInput1")}
                   required
                 />
               </div>
@@ -243,8 +348,8 @@ function App() {
                 <input
                   type="text"
                   name="phone"
-                  className="flex w-full rounded-lg border bg-secondary px-3 py-3 text-lg focus-visible:outline-1 outline-cyan-500"
-                  placeholder="رقم الجوال"
+                  className="flex w-full rounded-lg border bg-secondary px-3 py-3 text-[1rem] focus-visible:outline-1 outline-cyan-500"
+                  placeholder={t("formInput2")}
                   required
                 />
               </div>
@@ -252,25 +357,25 @@ function App() {
                 <input
                   type="email"
                   name="email"
-                  className="flex w-full rounded-lg border bg-secondary px-3 py-3 text-lg focus-visible:outline-1 outline-cyan-500"
-                  placeholder="البريد الإلكتروني"
+                  className="flex w-full rounded-lg border bg-secondary px-3 py-3 text-[1rem] focus-visible:outline-1 outline-cyan-500"
+                  placeholder={t("formInput3")}
                   required
                 />
               </div>
               <div className="w-full">
                 <textarea
                   name="message"
-                  className="flex min-h-[80px] w-full rounded-lg border bg-secondary p-3 text-lg focus-visible:outline-1 outline-cyan-500"
-                  placeholder="اكتب رسالتك هنا"
+                  className="flex min-h-[80px] w-full rounded-lg border bg-secondary p-3 text-[1rem] focus-visible:outline-1 outline-cyan-500"
+                  placeholder={t("formInput4")}
                   required
                   rows="5"
                 ></textarea>
               </div>
               <button
-                className="flex items-center justify-center px-6 py-3 rounded-lg text-lg font-medium  transition-all duration-500 focus-visible:outline-1 outline-cyan-500 bg-secondary hover:bg-main mb-4"
+                className="flex items-center justify-center px-6 py-3 rounded-lg text-[1rem] font-medium  transition-all duration-500 focus-visible:outline-1 outline-cyan-500 bg-secondary hover:bg-main mb-4"
                 type="submit"
               >
-                إرسال الرسالة
+                {t("formbtn")}
               </button>
             </form>
           </div>
@@ -281,17 +386,15 @@ function App() {
           id="vision"
           className="mt-10 bg-secondary rounded-lg px-4 py-10"
         >
-          <h2 className="relative text-4xl font-bold text-center rounded-lg my-10 px-6 py-2 border-2  border-main transition duration-500  w-fit mx-auto group z-10">
-            رؤيتنا
+          <h2 className="relative text-xl md:text-4xl font-bold text-center rounded-lg my-10 px-6 py-2 border-2  border-main transition duration-500  w-fit mx-auto group z-10">
+            {t("vision")}
             {/* الدوائر الجانبية */}
             <span className="absolute top-1/2 left-[-30px] w-3 h-3 bg-main rounded-lg transform -translate-y-1/2 transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:left-0 group-hover:rounded-none group-hover:z-[-1]"></span>
             <span className="absolute top-1/2 right-[-30px] w-3 h-3 bg-main rounded-lg transform -translate-y-1/2 transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:right-0 group-hover:rounded-none group-hover:z-[-1]"></span>
           </h2>
           <div>
-            <p className="text-lg md:text-2xl font-medium text-center ">
-              نسعى لأن نكون المركز الرائد في مجال التحكيم والوساطة على المستوى
-              الدولي، من خلال تقديم خدمات عالية الجودة تتوافق مع المعايير
-              الدولية.
+            <p className="text-[1rem] md:text-[1.35rem] font-medium text-center ">
+              {t("article10")}
             </p>
           </div>
         </section>
@@ -300,17 +403,17 @@ function App() {
       {/* <!-- start footer section  --> */}
       <footer className=" bg-main py-8 mt-10 ">
         <div className="container px-3 mx-auto grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4">
-          <article className=" flex flex-col items-center md:items-start rounded-lg p-4 text-lg font-medium">
-            <p className="mb-4 text-lg ">الرقم الموحد 200202979</p>
-            <p className="text-lg ">السجل التجاري 74516</p>
+          <article className=" flex flex-col items-center md:items-start rounded-lg p-4 text-[1rem] font-medium">
+            <p className="mb-4 text-[1rem] ">الرقم الموحد 200202979</p>
+            <p className="text-[1rem] ">السجل التجاري 74516</p>
           </article>
-          <article className="flex flex-col items-center md:items-end lg:items-center rounded-lg p-4 text-lg font-medium">
+          <article className="flex flex-col items-center md:items-end lg:items-center rounded-lg p-4 text-[1rem] font-medium">
             <p className="flex items-center justify-end mb-4">
               <a
                 href="mailto:Info@SSCIA.co"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-lg hover:text-white"
+                className="text-[1rem] hover:text-white"
               >
                 Info@SSCIA.co
               </a>
@@ -321,21 +424,22 @@ function App() {
                 href="https://www.SSCIA.co"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-lg hover:text-white"
+                className="text-[1rem] hover:text-white"
               >
                 www.SSCIA.co
               </a>
               <i className="fa-solid fa-globe ms-4"></i>
             </p>
           </article>
-          <article className="flex flex-col items-center md:items-start lg:items-end    rounded-lg p-4 text-lg font-medium">
-            <p className="mb-4 text-lg ">National Unified No: 200202979</p>
-            <p className="text-lg ">Company Registration No: 74516</p>
+          <article className="flex flex-col items-center md:items-start lg:items-end    rounded-lg p-4 text-[1rem] font-medium">
+            <p className="mb-4 text-[1rem] ">National Unified No: 200202979</p>
+            <p className="text-[1rem] ">Company Registration No: 74516</p>
           </article>
         </div>
-        <p className="container px-3 pt-8 pb-4 mx-auto text-sm md:text-2xl text-center">
-          جميع الحقوق محفوظة © <span id="year">{new Date().getFullYear()}</span>
-          المركز المتخصص السعودي للتحكيم
+        <p className="container px-3 pt-8 pb-4 mx-auto text-sm md:text-xl text-center">
+          <span>{t("rights1")}</span>{" "}
+          <span id="year">{new Date().getFullYear()}</span>
+          <span> {t("rights2")}</span>
         </p>
       </footer>
       {/* <!-- end footer section  --> */}
