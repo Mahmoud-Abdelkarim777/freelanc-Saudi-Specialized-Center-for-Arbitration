@@ -1,4 +1,4 @@
-import logo from "./assets/logo.jpg";
+// import logo from "./assets/logo.jpg";
 import logo1 from "./assets/logo.avif";
 import logo2 from "./assets/logo.webp";
 import "./App.css";
@@ -153,15 +153,15 @@ function App() {
                 : "w-[242px] md:w-[110rem] md:ms-8 md:h-[242px] lg:h-[242px] lg:w-[70rem]"
             }`}
           >
-          <picture>
-          <source srcSet={logo} type="image/jpg" />
-          <source srcSet={logo2} type="image/webp" />
-            <img
-              src={logo1}
-              loading="lazy"
-              alt="شعار المركز المتخصص السعودي للتحكيم"
-            ></img>
-          </picture>
+            <picture>
+              {/* <source srcSet={logo} type="image/jpg" /> */}
+              <source srcSet={logo2} type="image/webp" />
+              <img
+                src={logo1}
+                loading="lazy"
+                alt="شعار المركز المتخصص السعودي للتحكيم"
+              ></img>
+            </picture>
           </div>
           <div>
             <h1
@@ -184,7 +184,10 @@ function App() {
         </section>
         {/* <!-- end hero section  --> */}
         {/* <!-- start services section  --> */}
-        <section id="services" className="min-h[576px] md:min-h-[396px] lg:min-h-[324px]">
+        <section
+          id="services"
+          className="min-h[576px] md:min-h-[396px] lg:min-h-[324px]"
+        >
           <h2 className="relative text-xl md:text-4xl font-bold text-center rounded-lg my-10 px-6 py-2 border-2  border-main transition duration-500  w-fit mx-auto group z-10">
             {t("services")}
             {/* الدوائر الجانبية */}
@@ -245,80 +248,132 @@ function App() {
               <thead>
                 <tr>
                   <th className="border border-slate-600 p-1">{t("No")}</th>
-                  <th className="border border-slate-600 p-1">{t("Country")}</th>
-                  <th className="border border-slate-600 p-1">{t("CenterName")}</th>
+                  <th className="border border-slate-600 p-1">
+                    {t("Country")}
+                  </th>
+                  <th className="border border-slate-600 p-1">
+                    {t("CenterName")}
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td className="border border-slate-600 p-1 text-center">1</td>
-                  <td className="border border-slate-600 p-1">{t("country1")}</td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country1")}
+                  </td>
                   <td className="border border-slate-600 p-1">{t("table1")}</td>
                 </tr>
                 <tr>
                   <td className="border border-slate-600 p-1 text-center">2</td>
-                  <td className="border border-slate-600 p-1">{t("country2")}</td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country2")}
+                  </td>
                   <td className="border border-slate-600 p-1">{t("table2")}</td>
                 </tr>
                 <tr>
                   <td className="border border-slate-600 p-1 text-center">3</td>
-                  <td className="border border-slate-600 p-1">{t("country3")}</td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country3")}
+                  </td>
                   <td className="border border-slate-600 p-1">{t("table3")}</td>
                 </tr>
                 <tr>
                   <td className="border border-slate-600 p-1 text-center">4</td>
-                  <td className="border border-slate-600 p-1">{t("country4")}</td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country4")}
+                  </td>
                   <td className="border border-slate-600 p-1">{t("table4")}</td>
                 </tr>
                 <tr>
                   <td className="border border-slate-600 p-1 text-center">5</td>
-                  <td className="border border-slate-600 p-1">{t("country5")}</td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country5")}
+                  </td>
                   <td className="border border-slate-600 p-1">{t("table5")}</td>
                 </tr>
                 <tr>
                   <td className="border border-slate-600 p-1 text-center">6</td>
-                  <td className="border border-slate-600 p-1">{t("country6")}</td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country6")}
+                  </td>
                   <td className="border border-slate-600 p-1">{t("table6")}</td>
                 </tr>
                 <tr>
                   <td className="border border-slate-600 p-1 text-center">7</td>
-                  <td className="border border-slate-600 p-1">{t("country7")}</td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country7")}
+                  </td>
                   <td className="border border-slate-600 p-1">{t("table7")}</td>
                 </tr>
                 <tr>
                   <td className="border border-slate-600 p-1 text-center">8</td>
-                  <td className="border border-slate-600 p-1">{t("country8")}</td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country8")}
+                  </td>
                   <td className="border border-slate-600 p-1">{t("table8")}</td>
                 </tr>
                 <tr>
                   <td className="border border-slate-600 p-1 text-center">9</td>
-                  <td className="border border-slate-600 p-1">{t("country9")}</td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country9")}
+                  </td>
                   <td className="border border-slate-600 p-1">{t("table9")}</td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-600 p-1 text-center">10</td>
-                  <td className="border border-slate-600 p-1">{t("country10")}</td>
-                  <td className="border border-slate-600 p-1">{t("table10")}</td>
+                  <td className="border border-slate-600 p-1 text-center">
+                    10
+                  </td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country10")}
+                  </td>
+                  <td className="border border-slate-600 p-1">
+                    {t("table10")}
+                  </td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-600 p-1 text-center">11</td>
-                  <td className="border border-slate-600 p-1">{t("country11")}</td>
-                  <td className="border border-slate-600 p-1">{t("table11")}</td>
+                  <td className="border border-slate-600 p-1 text-center">
+                    11
+                  </td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country11")}
+                  </td>
+                  <td className="border border-slate-600 p-1">
+                    {t("table11")}
+                  </td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-600 p-1 text-center">12</td>
-                  <td className="border border-slate-600 p-1">{t("country12")}</td>
-                  <td className="border border-slate-600 p-1">{t("table12")}</td>
+                  <td className="border border-slate-600 p-1 text-center">
+                    12
+                  </td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country12")}
+                  </td>
+                  <td className="border border-slate-600 p-1">
+                    {t("table12")}
+                  </td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-600 p-1 text-center">13</td>
-                  <td className="border border-slate-600 p-1">{t("country13")}</td>
-                  <td className="border border-slate-600 p-1">{t("table13")}</td>
+                  <td className="border border-slate-600 p-1 text-center">
+                    13
+                  </td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country13")}
+                  </td>
+                  <td className="border border-slate-600 p-1">
+                    {t("table13")}
+                  </td>
                 </tr>
                 <tr>
-                  <td className="border border-slate-600 p-1 text-center">14</td>
-                  <td className="border border-slate-600 p-1">{t("country14")}</td>
-                  <td className="border border-slate-600 p-1">{t("table14")}</td>
+                  <td className="border border-slate-600 p-1 text-center">
+                    14
+                  </td>
+                  <td className="border border-slate-600 p-1">
+                    {t("country14")}
+                  </td>
+                  <td className="border border-slate-600 p-1">
+                    {t("table14")}
+                  </td>
                 </tr>
               </tbody>
             </table>
