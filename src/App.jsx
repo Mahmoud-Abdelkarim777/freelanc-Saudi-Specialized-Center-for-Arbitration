@@ -44,7 +44,7 @@ function App() {
               <i className="fa-solid fa-globe text-white"></i>
               <button
                 onClick={toggleLanguage}
-                className="font-bold text-white mx-2 "
+                className="font-bold text-white  mx-2"
               >
                 {i18n.language === "en" ? "العربية" : "English"}
               </button>
@@ -59,6 +59,7 @@ function App() {
             } lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50 transition duration-500 ease-in-out `}
           >
             <button
+              aria-label="غلق القائمة"
               id="toggleClose"
               className="lg:hidden fixed top-2 right-4 z-[100] rounded-full transition-all duration-500 bg-white p-3"
               onClick={() => setToggleMenu(!toggleMenu)}
@@ -119,6 +120,7 @@ function App() {
           </div>
           <div className="flex lg:hidden">
             <button
+              aria-label="فتح القائمة"
               id="toggleOpen"
               className="lg:hidden"
               onClick={() => setToggleMenu(!toggleMenu)}
