@@ -179,7 +179,7 @@ function App() {
         </section>
         {/* <!-- end hero section  --> */}
         {/* <!-- start services section  --> */}
-        <section id="services" className="">
+        <section id="services" className="min-h[576px] md:min-h-[396px] lg:min-h-[324px]">
           <h2 className="relative text-xl md:text-4xl font-bold text-center rounded-lg my-10 px-6 py-2 border-2  border-main transition duration-500  w-fit mx-auto group z-10">
             {t("services")}
             {/* الدوائر الجانبية */}
