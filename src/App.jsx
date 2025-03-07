@@ -1,4 +1,6 @@
 import logo from "./assets/logo.jpg";
+import logo1 from "./assets/logo.avif";
+import logo2 from "./assets/logo.webp";
 import "./App.css";
 import { useState } from "react";
 
@@ -151,12 +153,15 @@ function App() {
                 : "w-[242px] md:w-[110rem] md:ms-8 md:h-[242px] lg:h-[242px] lg:w-[70rem]"
             }`}
           >
+          <picture>
+          <source srcSet={logo} type="image/jpg" />
+          <source srcSet={logo2} type="image/webp" />
             <img
-              src={logo}
+              src={logo1}
               loading="lazy"
-              className=""
               alt="شعار المركز المتخصص السعودي للتحكيم"
             ></img>
+          </picture>
           </div>
           <div>
             <h1
