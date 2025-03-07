@@ -6,7 +6,7 @@ import { useState } from "react";
 
 // language
 import { useTranslation } from "react-i18next";
-import "./I18n"; // استيراد الترجمة
+import "./I18n"; 
 
 function App() {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -39,7 +39,6 @@ function App() {
             >
               {t("title1")}
             </a>
-            {/* here  */}
             <div className={`${isArabic ? "self-start" : "self-end"}`}>
               <i className="fa-solid fa-globe text-white"></i>
               <button
@@ -48,8 +47,6 @@ function App() {
               >
                 {i18n.language === "en" ? "العربية" : "English"}
               </button>
-              {/* <h1>{t("hell")}</h1>
-            <p>{t("welcome")}</p> */}
             </div>
           </div>
           <div

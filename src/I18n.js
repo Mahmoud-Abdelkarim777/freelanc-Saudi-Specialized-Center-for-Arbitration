@@ -150,20 +150,18 @@ const resources = {
   }
 };
 
-// استرجاع اللغة المحفوظة أو تعيين "en" كافتراضية
 const savedLang = localStorage.getItem("lang") || "ar";
 
 i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: savedLang, // ✅ ضبط اللغة هنا مباشرة
+    lng: savedLang, 
     fallbackLng: "ar",
     interpolation: {
       escapeValue: false
     }
   });
-  // تحديث اتجاه الصفحة عند تحميل اللغة
 document.documentElement.lang = savedLang;
 document.documentElement.dir = savedLang === "ar" ? "rtl" : "ltr";
 

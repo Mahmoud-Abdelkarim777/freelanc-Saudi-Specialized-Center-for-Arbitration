@@ -6,20 +6,20 @@ export default defineConfig({
   plugins: [
     react(),
     viteCompression({
-      verbose: true, // يُظهر معلومات في الـ console عن الملفات المضغوطة
-      disable: false, // تأكد أن الضغط غير معطّل
-      threshold: 1024, // اضغط الملفات التي حجمها أكبر من 1KB
-      algorithm: 'gzip', // استخدم Gzip للضغط
-      ext: '.gz', // امتداد الملفات المضغوطة
+      verbose: true, 
+      disable: false, 
+      threshold: 1024, 
+      algorithm: 'gzip', 
+      ext: '.gz',
     })
     
   ],
   build: {
-    outDir: 'dist', // تأكد أن الإخراج يتم في مجلد "dist"
-    assetsDir: 'assets', // ضع الملفات في مجلد "assets"
-    chunkSizeWarningLimit: 1000, // تقليل تحذيرات حجم الملفات
+    outDir: 'dist', 
+    assetsDir: 'assets', 
+    chunkSizeWarningLimit: 1000, 
   },
   server: {
-    compress: true, // تفعيل الضغط أثناء التشغيل المحلي
+    compress: true, 
   }
 });
