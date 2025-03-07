@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import viteCompression from 'vite-plugin-compression';
-import imageOptimizer from 'vite-plugin-image-optimizer';
 
 export default defineConfig({
   plugins: [
@@ -12,11 +11,8 @@ export default defineConfig({
       threshold: 1024, // اضغط الملفات التي حجمها أكبر من 1KB
       algorithm: 'gzip', // استخدم Gzip للضغط
       ext: '.gz', // امتداد الملفات المضغوطة
-    }),
-    imageOptimizer({
-      webp: { quality: 80 },
-      avif: { quality: 80 },
     })
+    
   ],
   build: {
     outDir: 'dist', // تأكد أن الإخراج يتم في مجلد "dist"
