@@ -1,4 +1,4 @@
-// import logo from "./assets/logo.jpg";
+import logo from "./assets/logo.jpg";
 import logo1 from "./assets/logo.avif";
 import logo2 from "./assets/logo.webp";
 import "./App.css";
@@ -154,10 +154,10 @@ function App() {
             }`}
           >
             <picture>
-              {/* <source srcSet={logo} type="image/jpg" /> */}
               <source srcSet={logo2} type="image/webp" />
+              <source srcSet={logo1} type="image/avif" />
               <img
-                src={logo1}
+                src={logo}
                 loading="lazy"
                 alt="شعار المركز المتخصص السعودي للتحكيم"
               ></img>
