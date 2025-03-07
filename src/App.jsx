@@ -153,8 +153,9 @@ function App() {
           >
             <img
               src={logo}
-              className="w-full h-full"
-              alt="المركز المتخصص السعودي للتحكيم"
+              loading="lazy"
+              className=""
+              alt="شعار المركز المتخصص السعودي للتحكيم"
             ></img>
           </div>
           <div>
