@@ -156,7 +156,6 @@ function App() {
               <source srcSet={logo2} type="image/webp" />
               <source srcSet={logo1} type="image/avif" />
               <img
-              className="select-none pointer-events-none"
                 src={logo}
                 loading="lazy"
                 alt="شعار المركز المتخصص السعودي للتحكيم"
